@@ -26,4 +26,4 @@ soc.close()
 
 for i in range(10):
 thread = threading.Thread(target=attack)
-target.start()
+thread.start()

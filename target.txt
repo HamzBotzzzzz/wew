@@ -1,0 +1,3 @@
+target_ip=45.126.43.27
+
+#ubah ip targetr nya trus hapus line ini jadi 1 line aja
